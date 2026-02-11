@@ -744,6 +744,107 @@ header {
     font-size: 1.1rem;
 }
 
+/* Concept Section */
+.concept {
+    background:
+        linear-gradient(135deg, rgba(31, 31, 31, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%),
+        repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0, 255, 255, 0.03) 10px, rgba(0, 255, 255, 0.03) 20px);
+    border-left: 8px solid var(--neon-cyan);
+    border-radius: 20px;
+    padding: 60px;
+    margin: 100px 0;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+}
+
+.concept::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    right: -100px;
+    top: -100px;
+    animation: blob-movement 10s ease-in-out infinite;
+}
+
+.concept h2 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 3rem;
+    color: var(--neon-cyan);
+    margin-bottom: 40px;
+    text-shadow:
+        0 0 15px var(--neon-cyan),
+        0 0 30px var(--neon-cyan),
+        3px 3px 0 var(--neon-pink);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    position: relative;
+    z-index: 1;
+}
+
+.concept-content {
+    position: relative;
+    z-index: 1;
+}
+
+.concept-content p {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    line-height: 2.2;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.concept-content .lead {
+    font-size: 1.4rem;
+    color: var(--text-white);
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.concept-content strong {
+    color: var(--neon-pink);
+    font-weight: 900;
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.concept-content blockquote {
+    border-left: 6px solid var(--neon-pink);
+    padding-left: 35px;
+    margin: 50px 0;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--neon-pink);
+    font-weight: 400;
+    text-shadow:
+        0 0 15px var(--neon-pink),
+        0 0 30px var(--neon-pink);
+}
+
+/* Room Details */
+.room-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    color: var(--neon-cyan);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.room-desc-sub {
+    font-size: 0.95rem;
+    color: var(--neon-cyan);
+    font-style: italic;
+    margin-top: 15px;
+    text-shadow: 0 0 5px var(--neon-cyan);
+}
+
 /* About & Landlord - EXTREME */
 .about, .landlord {
     background:
@@ -868,6 +969,46 @@ header {
         0 0 20px var(--neon-pink);
 }
 
+/* Expertise Section */
+.expertise {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 12px;
+}
+
+.expertise h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: var(--neon-cyan);
+    margin-bottom: 20px;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.expertise ul {
+    list-style: none;
+    padding: 0;
+}
+
+.expertise li {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.expertise li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--neon-cyan);
+    font-size: 1.2rem;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -879,21 +1020,44 @@ footer {
     background: linear-gradient(180deg, transparent, rgba(255, 0, 128, 0.05));
 }
 
-footer p {
-    margin: 20px 0;
-    font-size: 1rem;
+.footer-content h3 {
     font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 0.1em;
+    font-size: 1.5rem;
+    color: var(--neon-cyan);
+    margin-bottom: 30px;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 10px var(--neon-cyan);
 }
 
-.footer-tagline {
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.footer-links a,
+.footer-links span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
     color: var(--neon-pink);
-    font-style: italic;
-    margin-top: 25px;
-    font-size: 1.2rem;
-    text-shadow:
-        0 0 15px var(--neon-pink),
-        0 0 30px var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.copyright {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin-top: 40px;
+    letter-spacing: 0.1em;
 }
 
 /* Responsive Design */
