@@ -1,0 +1,999 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --neon-cyan: #00ffff;
+    --neon-pink: #ff0080;
+    --neon-purple: #b000ff;
+    --neon-blue: #0066ff;
+    --neon-green: #00ff41;
+    --neon-yellow: #ffff00;
+    --deep-black: #0a0a0a;
+    --dark-gray: #1a1a1a;
+    --medium-gray: #1f1f1f;
+    --light-gray: #2a2a2a;
+    --text-white: #ffffff;
+    --text-gray: #a0a0a0;
+}
+
+body {
+    font-family: 'Zen Kaku Gothic New', 'M PLUS Rounded 1c', sans-serif;
+    background: var(--deep-black);
+    color: var(--text-white);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Insane animated background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(255, 0, 128, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(176, 0, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 60% 60%, rgba(0, 255, 65, 0.15) 0%, transparent 50%);
+    animation: crazy-drift 15s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes crazy-drift {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        filter: hue-rotate(0deg);
+    }
+    25% {
+        transform: translate(10%, -10%) rotate(5deg) scale(1.1);
+        filter: hue-rotate(90deg);
+    }
+    50% {
+        transform: translate(-10%, 10%) rotate(-5deg) scale(0.9);
+        filter: hue-rotate(180deg);
+    }
+    75% {
+        transform: translate(5%, -5%) rotate(3deg) scale(1.05);
+        filter: hue-rotate(270deg);
+    }
+}
+
+/* Scanline effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 255, 0.03) 0px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+    animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100px); }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* INSANE 3D LOGO */
+header {
+    text-align: center;
+    padding: 80px 20px;
+    margin-bottom: 100px;
+    position: relative;
+    overflow: visible;
+}
+
+.logo-3d-wrapper {
+    position: relative;
+    perspective: 2000px;
+}
+
+.logo-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    animation: float-logo 6s ease-in-out infinite;
+}
+
+@keyframes float-logo {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-20px) rotateX(5deg); }
+}
+
+.logo-main {
+    font-family: 'Black Ops One', 'Bebas Neue', cursive;
+    font-size: 7rem;
+    font-weight: 900;
+    color: var(--text-white);
+    letter-spacing: 0.1em;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    z-index: 10;
+    text-shadow:
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-pink),
+        0 0 80px var(--neon-pink),
+        0 0 120px var(--neon-pink),
+        5px 5px 0px var(--neon-cyan),
+        10px 10px 0px var(--neon-purple),
+        15px 15px 0px var(--neon-pink),
+        20px 20px 0px rgba(0, 0, 0, 0.5);
+    animation:
+        mega-flicker 4s infinite alternate,
+        pulse-extreme 2s ease-in-out infinite,
+        rgb-shift 3s ease-in-out infinite;
+    transform: translateZ(50px);
+}
+
+@keyframes mega-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+            0 0 10px var(--neon-pink),
+            0 0 20px var(--neon-pink),
+            0 0 40px var(--neon-pink),
+            0 0 80px var(--neon-pink),
+            0 0 120px var(--neon-pink),
+            5px 5px 0px var(--neon-cyan),
+            10px 10px 0px var(--neon-purple),
+            15px 15px 0px var(--neon-pink),
+            20px 20px 0px rgba(0, 0, 0, 0.5);
+    }
+    20%, 24%, 55% {
+        text-shadow:
+            0 0 5px var(--neon-cyan),
+            0 0 10px var(--neon-cyan),
+            3px 3px 0px var(--neon-pink);
+    }
+}
+
+@keyframes pulse-extreme {
+    0%, 100% { transform: scale(1) translateZ(50px); }
+    50% { transform: scale(1.05) translateZ(60px); }
+}
+
+@keyframes rgb-shift {
+    0%, 100% { filter: hue-rotate(0deg); }
+    33% { filter: hue-rotate(120deg); }
+    66% { filter: hue-rotate(240deg); }
+}
+
+/* 3D Layers for depth */
+.logo-layers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.logo-layers .layer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Black Ops One', 'Bebas Neue', cursive;
+    font-size: 7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.3;
+}
+
+.logo-layers .layer:nth-child(1) {
+    color: var(--neon-cyan);
+    transform: translateX(-50%) translateZ(-10px);
+}
+
+.logo-layers .layer:nth-child(2) {
+    color: var(--neon-pink);
+    transform: translateX(-50%) translateZ(-20px);
+}
+
+.logo-layers .layer:nth-child(3) {
+    color: var(--neon-purple);
+    transform: translateX(-50%) translateZ(-30px);
+}
+
+.logo-layers .layer:nth-child(4) {
+    color: var(--neon-green);
+    transform: translateX(-50%) translateZ(-40px);
+}
+
+.logo-layers .layer:nth-child(5) {
+    color: var(--neon-yellow);
+    transform: translateX(-50%) translateZ(-50px);
+}
+
+.subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: var(--neon-cyan);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    margin: 30px 0;
+    text-shadow:
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-cyan);
+    animation: glitch-text 5s infinite;
+}
+
+@keyframes glitch-text {
+    0%, 90%, 100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    91% { transform: translate(-2px, 2px); opacity: 0.8; }
+    92% { transform: translate(2px, -2px); opacity: 0.9; }
+    93% { transform: translate(-1px, 1px); opacity: 0.8; }
+}
+
+.tagline-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 3px solid var(--neon-pink);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 30px rgba(255, 0, 128, 0.2),
+        0 0 40px rgba(255, 0, 128, 0.4);
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    animation: scan-horizontal 3s linear infinite;
+}
+
+@keyframes scan-horizontal {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.noise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, transparent 2px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, transparent 2px);
+    opacity: 0.5;
+    animation: noise-flicker 0.1s infinite;
+}
+
+@keyframes noise-flicker {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.3; }
+}
+
+.tagline {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 1.3rem;
+    color: var(--text-white);
+    font-weight: 400;
+    line-height: 2;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+}
+
+/* Apartment Building - EXTREME */
+.apartment-building {
+    margin: 100px auto;
+    max-width: 1200px;
+    perspective: 2000px;
+}
+
+.floor {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+    position: relative;
+    animation: slide-in-floor 1s ease-out backwards;
+}
+
+@keyframes slide-in-floor {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+}
+
+.floor-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--neon-cyan);
+    background:
+        linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0.1) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 255, 255, 0.1) 10px, rgba(0, 255, 255, 0.1) 20px);
+    border: 3px solid var(--neon-cyan);
+    border-radius: 15px;
+    text-shadow:
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-cyan);
+    box-shadow:
+        inset 0 0 30px rgba(0, 255, 255, 0.2),
+        0 0 30px rgba(0, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: floor-glow 3s ease-in-out infinite;
+}
+
+@keyframes floor-glow {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 30px rgba(0, 255, 255, 0.2),
+            0 0 30px rgba(0, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 40px rgba(0, 255, 255, 0.3),
+            0 0 50px rgba(0, 255, 255, 0.8);
+    }
+}
+
+.floor-label::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(0, 255, 255, 0.3),
+        transparent
+    );
+    animation: crazy-shine 2s infinite;
+}
+
+@keyframes crazy-shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.rooftop {
+    grid-template-columns: 100px 1fr;
+    margin-bottom: 60px;
+}
+
+/* Room Styles - ULTRA EXTREME */
+.room {
+    background:
+        linear-gradient(135deg, rgba(31, 31, 31, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 0, 128, 0.03) 10px, rgba(255, 0, 128, 0.03) 20px);
+    border: 3px solid transparent;
+    border-radius: 20px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    backdrop-filter: blur(15px);
+    transform-style: preserve-3d;
+}
+
+.room::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(255, 0, 128, 0.2) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.room::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(
+        45deg,
+        var(--neon-cyan),
+        var(--neon-pink),
+        var(--neon-purple),
+        var(--neon-green),
+        var(--neon-yellow),
+        var(--neon-cyan)
+    );
+    background-size: 400% 400%;
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: rainbow-border 3s ease infinite;
+}
+
+@keyframes rainbow-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.room.active:hover::before {
+    opacity: 1;
+}
+
+.room.active:hover::after {
+    opacity: 1;
+}
+
+.room.active:hover {
+    transform: translateY(-15px) scale(1.05) rotateZ(2deg);
+    box-shadow:
+        0 30px 80px rgba(0, 255, 255, 0.4),
+        0 0 60px rgba(255, 0, 128, 0.3),
+        inset 0 0 40px rgba(0, 255, 255, 0.1);
+}
+
+.room.active {
+    cursor: pointer;
+}
+
+.room.coming-soon {
+    opacity: 0.7;
+    cursor: default;
+    border: 3px solid var(--neon-purple);
+    animation: pulse-coming-soon 2s ease-in-out infinite;
+}
+
+@keyframes pulse-coming-soon {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(176, 0, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(176, 0, 255, 0.6);
+    }
+}
+
+.room.coming-soon:hover {
+    transform: scale(1.02);
+}
+
+.room.empty {
+    background: rgba(26, 26, 26, 0.3);
+    border: 3px dashed var(--light-gray);
+    opacity: 0.3;
+}
+
+.room-content {
+    position: relative;
+    z-index: 1;
+}
+
+.room-icon {
+    font-size: 5rem;
+    margin-bottom: 25px;
+    filter:
+        drop-shadow(0 0 15px rgba(0, 255, 255, 0.6))
+        drop-shadow(0 0 30px rgba(255, 0, 128, 0.4));
+    transition: all 0.4s ease;
+    animation: icon-float 3s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.room.active:hover .room-icon {
+    transform: scale(1.2) rotate(360deg);
+    filter:
+        drop-shadow(0 0 25px rgba(0, 255, 255, 0.8))
+        drop-shadow(0 0 50px rgba(255, 0, 128, 0.6));
+}
+
+.room h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+    color: var(--text-white);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-shadow:
+        0 0 15px rgba(0, 255, 255, 0.5),
+        2px 2px 0 var(--neon-pink);
+    text-transform: uppercase;
+}
+
+.room-desc {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.room-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--light-gray);
+    text-align: center;
+}
+
+.room-status {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    position: relative;
+    overflow: hidden;
+}
+
+.room-status::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: status-mega-shine 1.5s infinite;
+}
+
+@keyframes status-mega-shine {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+.room-status.available {
+    background: rgba(0, 255, 255, 0.2);
+    color: var(--neon-cyan);
+    border: 3px solid var(--neon-cyan);
+    box-shadow:
+        inset 0 0 15px rgba(0, 255, 255, 0.3),
+        0 0 25px rgba(0, 255, 255, 0.5);
+    animation: status-pulse-cyan 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse-cyan {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 15px rgba(0, 255, 255, 0.3),
+            0 0 25px rgba(0, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 25px rgba(0, 255, 255, 0.5),
+            0 0 40px rgba(0, 255, 255, 0.8);
+    }
+}
+
+.room-status.coming {
+    background: rgba(255, 0, 128, 0.2);
+    color: var(--neon-pink);
+    border: 3px solid var(--neon-pink);
+    box-shadow:
+        inset 0 0 15px rgba(255, 0, 128, 0.3),
+        0 0 25px rgba(255, 0, 128, 0.5);
+    animation: status-pulse-pink 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse-pink {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 15px rgba(255, 0, 128, 0.3),
+            0 0 25px rgba(255, 0, 128, 0.5);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 25px rgba(255, 0, 128, 0.5),
+            0 0 40px rgba(255, 0, 128, 0.8);
+    }
+}
+
+.room-status.vacant {
+    background: rgba(58, 58, 58, 0.2);
+    color: var(--light-gray);
+    border: 3px solid var(--light-gray);
+}
+
+/* Entrance - MEGA ENHANCED */
+.entrance {
+    background:
+        linear-gradient(135deg, rgba(31, 31, 31, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0, 255, 255, 0.05) 20px, rgba(0, 255, 255, 0.05) 40px);
+    border: 5px solid var(--neon-cyan);
+    border-radius: 25px;
+    padding: 60px;
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 50px rgba(0, 255, 255, 0.2),
+        0 0 60px rgba(0, 255, 255, 0.5);
+    animation: entrance-mega-glow 3s ease-in-out infinite;
+}
+
+@keyframes entrance-mega-glow {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 50px rgba(0, 255, 255, 0.2),
+            0 0 60px rgba(0, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 70px rgba(0, 255, 255, 0.3),
+            0 0 80px rgba(0, 255, 255, 0.7);
+    }
+}
+
+.entrance::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background:
+        repeating-conic-gradient(
+            from 0deg,
+            transparent 0deg 10deg,
+            rgba(0, 255, 255, 0.1) 10deg 20deg
+        );
+    animation: entrance-crazy-rotate 6s linear infinite;
+}
+
+@keyframes entrance-crazy-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.entrance-sign {
+    position: relative;
+    z-index: 1;
+}
+
+.entrance-sign h2 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 4rem;
+    color: var(--neon-cyan);
+    text-shadow:
+        0 0 15px var(--neon-cyan),
+        0 0 30px var(--neon-cyan),
+        0 0 60px var(--neon-cyan),
+        5px 5px 0 var(--neon-pink);
+    margin-bottom: 40px;
+    letter-spacing: 0.4em;
+    font-weight: 900;
+    animation: entrance-glitch 5s infinite;
+}
+
+@keyframes entrance-glitch {
+    0%, 96%, 100% { transform: translate(0); }
+    97% { transform: translate(-3px, 3px); }
+    98% { transform: translate(3px, -3px); }
+    99% { transform: translate(-2px, 2px); }
+}
+
+.community-info {
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.community-info h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.8rem;
+    color: var(--neon-pink);
+    margin: 20px 0;
+    text-shadow:
+        0 0 15px var(--neon-pink),
+        0 0 30px var(--neon-pink);
+}
+
+.community-info p {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: var(--text-gray);
+    font-size: 1.1rem;
+}
+
+/* About & Landlord - EXTREME */
+.about, .landlord {
+    background:
+        linear-gradient(135deg, rgba(31, 31, 31, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%),
+        repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255, 0, 128, 0.03) 10px, rgba(255, 0, 128, 0.03) 20px);
+    border-left: 8px solid var(--neon-pink);
+    border-radius: 20px;
+    padding: 60px;
+    margin: 100px 0;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 40px rgba(255, 0, 128, 0.3);
+}
+
+.about::before, .landlord::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 0, 128, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: blob-movement 10s ease-in-out infinite;
+}
+
+@keyframes blob-movement {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(50px, -50px) scale(1.2);
+    }
+    50% {
+        transform: translate(-50px, 50px) scale(0.8);
+    }
+    75% {
+        transform: translate(30px, 30px) scale(1.1);
+    }
+}
+
+.about::before { right: -100px; top: -100px; }
+.landlord::before { left: -100px; bottom: -100px; }
+
+.about h2, .landlord h2 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 3rem;
+    color: var(--neon-pink);
+    margin-bottom: 40px;
+    text-shadow:
+        0 0 15px var(--neon-pink),
+        0 0 30px var(--neon-pink),
+        3px 3px 0 var(--neon-cyan);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    position: relative;
+    z-index: 1;
+}
+
+.landlord {
+    border-left-color: var(--neon-cyan);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+}
+
+.landlord h2 {
+    color: var(--neon-cyan);
+    text-shadow:
+        0 0 15px var(--neon-cyan),
+        0 0 30px var(--neon-cyan),
+        3px 3px 0 var(--neon-pink);
+}
+
+.about-content, .landlord-info {
+    position: relative;
+    z-index: 1;
+}
+
+.about-content p, .landlord-info p {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    line-height: 2.2;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.about-content strong, .landlord-info strong {
+    color: var(--neon-cyan);
+    font-weight: 900;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.about-content blockquote {
+    border-left: 6px solid var(--neon-cyan);
+    padding-left: 35px;
+    margin: 50px 0;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--neon-cyan);
+    font-weight: 400;
+    text-shadow:
+        0 0 15px var(--neon-cyan),
+        0 0 30px var(--neon-cyan);
+}
+
+.landlord-info h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2.2rem;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    font-weight: 900;
+    text-shadow: 2px 2px 0 var(--neon-cyan);
+}
+
+.landlord-info .role {
+    color: var(--neon-pink);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    letter-spacing: 0.2em;
+    text-shadow:
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-pink);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 80px 20px;
+    margin-top: 120px;
+    border-top: 3px solid var(--neon-pink);
+    color: var(--text-gray);
+    position: relative;
+    background: linear-gradient(180deg, transparent, rgba(255, 0, 128, 0.05));
+}
+
+footer p {
+    margin: 20px 0;
+    font-size: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+.footer-tagline {
+    color: var(--neon-pink);
+    font-style: italic;
+    margin-top: 25px;
+    font-size: 1.2rem;
+    text-shadow:
+        0 0 15px var(--neon-pink),
+        0 0 30px var(--neon-pink);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo-main, .logo-layers .layer {
+        font-size: 3.5rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    .floor {
+        grid-template-columns: 70px 1fr;
+        gap: 25px;
+    }
+
+    .rooftop {
+        grid-template-columns: 70px 1fr;
+    }
+
+    .room {
+        padding: 35px;
+    }
+
+    .room h3 {
+        font-size: 1.3rem;
+    }
+
+    .about, .landlord {
+        padding: 45px 30px;
+    }
+
+    .about h2, .landlord h2 {
+        font-size: 2.2rem;
+    }
+
+    .entrance-sign h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+    }
+
+    .logo-main, .logo-layers .layer {
+        font-size: 2.5rem;
+        letter-spacing: 0.05em;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .floor {
+        grid-template-columns: 60px 1fr;
+        gap: 20px;
+    }
+
+    .floor-label {
+        font-size: 1.8rem;
+    }
+
+    .room {
+        padding: 25px;
+    }
+
+    .room-icon {
+        font-size: 3.5rem;
+    }
+
+    .entrance {
+        padding: 40px 25px;
+    }
+}
+
+/* Scrollbar - INSANE */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-gray);
+    border-left: 2px solid var(--neon-pink);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--neon-cyan) 0%, var(--neon-pink) 50%, var(--neon-purple) 100%);
+    border-radius: 10px;
+    border: 2px solid var(--dark-gray);
+    box-shadow:
+        0 0 15px var(--neon-cyan),
+        inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    box-shadow:
+        0 0 25px var(--neon-pink),
+        inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
